@@ -4,6 +4,23 @@ let myGridSize = prompt('What size would you like your grid to be?');
 let enemyGridSize = prompt('What size would you like your enemy grid to be?');
 let myGrid = createGrid(myGridSize);
 let enemyGrid = createGrid(enemyGridSize);
+let myShips = 3;
+let enemyShips = 3;
+
+///Impresion de los tableros
+printGrid(enemyGrid, true);
+printGrid(myGrid);
+
+
+///Coordenadas del Jugador
+for (let i = 1; i < 4; i++) {
+    let x = prompt('Enter the x coordinate for your ship number ' + i);
+    let y = prompt('Enter the y coordinate for your ship number ' + i);
+    placeCharacter(x, y, 'O', myGrid);
+    placeRandomCharacter('O', enemyGrid, enemyGridSize); /// Enemy AI en los parametros del tablero
+    printGrid(enemyGrid, true);
+    printGrid(myGrid);
+}
 
 ///Creación del tablero///
 ///Hacemos una función que tome parámetros de tamaño
@@ -13,7 +30,7 @@ function createGrid(size) {
   let grid = [];
   for (let i = 0; i< size; i++) {
     grid[i] = [];
-    for (let k = 0; j< size; j++) {
+    for (let j = 0; j< size; j++) {
       grid[i][j] = '-';///Cada posición inicial del tablero sera un guion.
     }
   }
@@ -43,7 +60,11 @@ function printGrid(grid, isEnemy = false) {
 function createHeaders(size) {
     let result = '  ';
     for (let i = 0; i < size; i++) {
-        result = '  ';
+        result += i + '  ';
     }
     return result;
+}
+
+function placeCharacter(x, y, c, grid) {
+    grid[y][x] = c;
 }
